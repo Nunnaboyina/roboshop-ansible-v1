@@ -25,7 +25,7 @@
 
   - name: Print the instance name
     debug:
-      msg: "{{ item.item }}"
+      msg: "{{ item.item }}.{{domain_name}}"
     loop: "{{ ec2_result.results }}" 
 
   # - name: creating route53 records
