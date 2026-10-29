@@ -23,9 +23,10 @@
     debug:
       msg: "{{ ec2_result.results }}"
 
-  # - name: Print the instance name
-  #   debug:
-  #     msg: "{{ ec2_result }}"
+  - name: Print the instance name
+    debug:
+      msg: "{{ item }}"
+    loop: "{{ec2_result.results}}" 
 
   # - name: creating route53 records
   #   amazon.aws.route53:
