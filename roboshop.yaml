@@ -4,6 +4,7 @@
   vars:
     instances: ['mongodb', 'redis', 'mysql', 'rabbitmq']
     action: create
+    domain_name: saidevops.shop
   tasks:
   - name: creating ec2 instances
     amazon.aws.ec2_instance:
@@ -16,3 +17,17 @@
       - "roboshop-{{ item }}"
     loop: "{{instances}}"
     when: action == "create"
+    register: ec2_result
+
+  - name: Print the Private IP Address
+    debug:
+      msg: "The private IP is: {{ ec2_result.instances[0].private_ip_address }}"
+  
+  # - name: creating route53 records
+  #   amazon.aws.route53:
+  #     zone: "{{domain_name}}"
+  #     record: "{{item}}.{{domain_name}}"
+  #     type: A
+  #     ttl: 1
+  #     value: 
+
