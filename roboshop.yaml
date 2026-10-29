@@ -19,9 +19,9 @@
     when: action == "create"
     register: ec2_result
 
-  - name: Print the Private IP Address
+  - name: Print ec2 output
     debug:
-      msg: "The private IP is: {{ ec2_result.instances[0].private_ip_address }}"
+      msg: "{{ ec2_result }}"
   
   # - name: creating route53 records
   #   amazon.aws.route53:
