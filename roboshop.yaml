@@ -23,16 +23,20 @@
   #   debug:
   #     msg: "{{ ec2_result.results }}"
 
-  - name: Print the instance name
-    debug:
-      msg: "{{ item.item }}.{{domain_name}}"
-    loop: "{{ ec2_result.results }}" 
+  # - name: Print the instance name
+  #   debug:
+  #     msg: "{{ item.item }}.{{domain_name}}"
+  #   loop: "{{ ec2_result.results }}" 
 
-  # - name: creating route53 records
-  #   amazon.aws.route53:
-  #     zone: "{{domain_name}}"
-  #     record: "{{item}}.{{domain_name}}"
-  #     type: A
-  #     ttl: 1
-  #     value: 
+  - name: creating route53 records with private_ip_address
+    amazon.aws.route53:
+      state: present
+      zone: "{{domain_name}}"
+      record: "{{item.item}}.{{domain_name}}" #mongodb.saidevops.shop
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+      overwrite: true
+    loop: "{{ ec2_result.results }}"
+    when: action == "create"
 
