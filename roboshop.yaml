@@ -19,9 +19,9 @@
     when: action == "create"
     register: ec2_result
 
-  - name: Print ec2 output
-    debug:
-      msg: "{{ ec2_result.results }}"
+  # - name: Print ec2 output
+  #   debug:
+  #     msg: "{{ ec2_result.results }}"
 
   - name: Print the instance name
     debug:
