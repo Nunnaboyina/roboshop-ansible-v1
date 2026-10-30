@@ -1,0 +1,29 @@
+- name: configuring redis server
+  hosts: redis
+  become: yes
+  tasks:
+  - name: enable redis 7
+    command: dnf module enable redis:7 -y
+    
+  - name: install redis
+    package:
+      name: redis
+      state: present
+    
+  - name: allowing remote connections
+    replace: 
+    path: /etc/redis/redis.conf
+    regexp: 'bind 127.0.0.1'
+    replace: 'bind 0.0.0.0'
+
+  - name: allowing remote connections
+    lineinfile: 
+    path: /etc/redis/redis.conf
+    regexp: '^#?protected-mode yes'
+    line: 'protected-mode no'
+
+  - name: starting and enabling redis service
+    service:
+    name: redis
+    state: started
+    enabled: yes

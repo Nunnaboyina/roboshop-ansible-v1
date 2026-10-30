@@ -1,0 +1,31 @@
+- name: configuring mysql server
+  hosts: mysql
+  become: yes
+  tasks: 
+  - name: Enabling mysql
+    command: dnf module enable mysql:8-4 -y
+
+  - name: Installing mysql
+    package:
+      name: mysql-server
+      state: present
+  - name: Start the mysql service
+    service:
+      name: mysqld
+      state: started
+      enabled: yes
+
+#ansible-galaxy collection install ansible.mysql  ------------- install this before running the playbook
+#pip3.9 install PyMySql 
+# if it still doesn't work , use command module
+  # - name: set root password
+  #   community.mysql.mysql_user:
+  #     name: root
+  #     host: localhost
+  #     password: "{{ mysql_root_password }}"
+  #     check_implicit_admin: true
+  #     state: present
+  
+  - name: set root password
+    command: mysql_secure_installation --set-root-pass "{{ mysql_root_password }}"
+
