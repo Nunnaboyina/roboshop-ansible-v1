@@ -22,18 +22,15 @@
 # ansible-galaxy collection install community.rabbitmq ------- install this before running playbook
   - name: Creating rabbitmq user
     community.rabbitmq.rabbitmq_user: 
-      user: "{{rabbitmq_user}}"
-      password: "{{rabbitmq_password}}"
+      user: roboshop
+      password: roboshop123
       state: present
       vhost: /
       configure_priv: .*
       write_priv: .*
       read_priv: .*
-    
-
-   - name: Enable and restart RabbitMQ service
+  - name: restart RabbitMQ service
     service:
       name: rabbitmq-server
       state: restarted
-      enabled: yes
   
