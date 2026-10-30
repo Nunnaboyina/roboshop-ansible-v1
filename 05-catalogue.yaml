@@ -75,7 +75,7 @@
     register: product_count
 
   - name: load master db data
-    shell: mongosh --host [mongodb] </app/db/master-data.js
+    shell: mongosh --host "{{mongodb_host}}" </app/db/master-data.js
     run_once: true
     when: product_count.stdout | int == 0
 
