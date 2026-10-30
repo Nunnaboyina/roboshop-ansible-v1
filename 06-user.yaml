@@ -3,9 +3,7 @@
   become: yes
   tasks:
   - name: disable node js
-    dnf:
-      name: nodejs
-      state: disabled
+    command: dnf module disable nodejs -y
 
   - name: enabled node js 24
     command: dnf module enable nodejs:24 -y
