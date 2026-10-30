@@ -15,9 +15,9 @@
       state: started
       enabled: yes
 
-#ansible-galaxy collection install ansible.mysql  ------------- install this before running the playbook
-#pip3.9 install PyMySql 
-# if it still doesn't work , use command module
+  #ansible-galaxy collection install ansible.mysql  ------------- install this before running the playbook
+  #pip3.9 install PyMySql 
+  # if it still doesn't work , use command module
   # - name: set root password
   #   community.mysql.mysql_user:
   #     name: root
