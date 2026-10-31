@@ -13,12 +13,12 @@
       name: nodejs
       state: present
 
-  - name: create system user
+  - name: creating system user
     user:
       name: roboshop
       create_home: false
       system: true
-      path: /app
+      home: /app    #default path : /home/roboshop
       shell: /sbin/nologin
       comment: "roboshop system user"
 
