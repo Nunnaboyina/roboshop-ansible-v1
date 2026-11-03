@@ -34,7 +34,7 @@
   - name: delete payment.zip
     file:
       src: /tmp/payment.zip
-      dest: absent
+      state: absent
   - name: create app directory
     file:
       src: /app
