@@ -14,5 +14,3 @@ cart_host: cart.saidevops.shop
 payment_host: payment.saidevops.shop
 shipping_db_user: shipping
 shipping_db_password: RoboShop@1
-rabbitmq_user: roboshop
-rabbitmq_password: roboshop123
