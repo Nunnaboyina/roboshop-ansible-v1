@@ -49,8 +49,8 @@
       ttl: 1
       value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
+    when: action == "create" and item.item == "frontend"   # when conditional stmt already evaluated as jinja2 expressions, no need to put item.item in {{}}
     loop: "{{ ec2_result.results }}"
-    when: action == "create" and "{{item.item}}" == "frontend"
 
   - name: deleting route53
     amazon.aws.route53:
