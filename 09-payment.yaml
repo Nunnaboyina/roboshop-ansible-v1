@@ -1,0 +1,69 @@
+- name: configure payment server
+  hosts: payment
+  become: yes
+  tasks:
+  - name: install python 3.14 version
+    dnf:
+      name: 
+      - python3.14
+      - python3.14-pip
+      state: present
+
+  - name: 
+    command: python3.14 --version
+    register: python_version
+
+  - name: checking python version
+    debug:
+      msg: "{{python_version}}"
+
+  - name: adding system user
+    user:
+      name: roboshop
+      create_home: false 
+      system: true
+      path: /app
+      shell: /sbin/nologin
+      comment: "roboshop system user"
+  - name: delete application
+    file:
+      src: /app
+      state: absent
+  - name: delete payment.zip
+    file:
+      src: /tmp/payment.zip
+      dest: absent
+  - name: create app directory
+    file:
+      src: /app
+      state: directory
+  - name: download payment.zip
+    get_url:
+      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/payment-v4.zip
+      dest: /tmp/payment.zip
+  - name: unarchive payment.zip
+    unarchive:
+      src: /tmp/payment.zip
+      dest: /app
+      remote_src: yes
+
+  - name: create virtual environment
+    ansible.builtin.pip:
+      requirements: /app/requirements.txt
+      virtualenv: /app/.venv
+      virtualenv_command: python3.14 -m venv
+
+  - name: copy payment service file  
+    template:
+      src: payment.service.j2
+      dest: /etc/systemd/system/payment.service
+      remote_src: yes
+  - name: daemon reload
+    systemd_service:
+      daemon_reload: true
+
+  - name: Start and Enable payment
+    service:
+      name: payment
+      state: present
+      enabled: yes

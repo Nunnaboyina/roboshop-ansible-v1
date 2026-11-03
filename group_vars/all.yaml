@@ -6,3 +6,13 @@ rabbitmq_password: roboshop123
 mongodb_host: mongodb.saidevops.shop
 redis_host: redis.saidevops.shop
 catalogue_host: catalogue.saidevops.shop
+shipping_host: shipping.saidevops.shop
+mysql_host: mysql.saidevops.shop
+rabbitmq_host: rabbitmq.saidevops.shop
+user_host: user.saidevops.shop
+cart_host: cart.saidevops.shop
+payment_host: payment.saidevops.shop
+shipping_db_user: shipping
+shipping_db_password: RoboShop@1
+rabbitmq_user: roboshop
+rabbitmq_password: roboshop123
