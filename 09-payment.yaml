@@ -27,17 +27,17 @@
       home: /app
       shell: /sbin/nologin
       comment: "roboshop system user"
-  - name: delete application
+  - name: delete app directory
     file:
-      src: /app
+      path: /app
       state: absent
   - name: delete payment.zip
     file:
-      src: /tmp/payment.zip
+      path: /tmp/payment.zip
       state: absent
   - name: create app directory
     file:
-      src: /app
+      path: /app
       state: directory
   - name: download payment.zip
     get_url:
