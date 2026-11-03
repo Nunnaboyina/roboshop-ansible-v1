@@ -44,13 +44,13 @@
     amazon.aws.route53:
       state: present
       zone: "{{domain_name}}"
-      record: "{{domain_name}}" #mongodb.saidevops.shop
+      record: "{{domain_name}}"                         #saidevops.shop
       type: A
       ttl: 1
       value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
     loop: "{{ ec2_result.results }}"
-    when: action == "create" and {{item.item}} == "frontend"
+    when: action == "create" and "{{item.item}}" == "frontend"
 
   - name: deleting route53
     amazon.aws.route53:
@@ -69,9 +69,10 @@
       type: A
     when: action == "delete" and instances == "frontend"
 
-  - name: deleting  frontend instances
+  - name: deleting instances
     amazon.aws.ec2_instance:
       state: absent
       name: "roboshop-{{ item }}"
       region: us-east-1
-    when: action == "delete" and instances == "frontend"
+    loop: "{{instances}}"
+    when: action == "delete"
