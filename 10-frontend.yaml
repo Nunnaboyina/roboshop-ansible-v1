@@ -42,7 +42,7 @@
   - name: unarchive the zip file
     unarchive:
       src: /usr/share/nginx/html
-      dest:  /tmp/frontend.zip
+      dest: /tmp/frontend.zip
       remote_src: yes
 
   - name: copy the roboshop conf file
@@ -50,7 +50,6 @@
       src: roboshop.conf.j2
       dest: /etc/nginx/default.d/roboshop.conf
       
-
   - name: 
     command: nginx -t
     
