@@ -41,8 +41,8 @@
   
   - name: unarchive the zip file
     unarchive:
-      src: /usr/share/nginx/html
-      dest: /tmp/frontend.zip
+      src: /tmp/frontend.zip
+      dest: /usr/share/nginx/html
       remote_src: yes
 
   - name: copy the roboshop conf file
@@ -52,6 +52,11 @@
       
   - name: 
     command: nginx -t
+    register: check_configuration
+
+  - name: checking the nginx configuration
+    debug:
+      msg: "{{check_configuration}}"
     
   - name: restart nginx
     service:
