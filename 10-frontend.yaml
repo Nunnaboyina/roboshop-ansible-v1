@@ -43,12 +43,13 @@
     unarchive:
       src: /usr/share/nginx/html
       dest:  /tmp/frontend.zip
+      remote_src: yes
 
   - name: copy the roboshop conf file
     template:
       src: roboshop.conf.j2
       dest: /etc/nginx/default.d/roboshop.conf
-      remote_src: yes
+      
 
   - name: 
     command: nginx -t
