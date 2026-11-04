@@ -47,7 +47,7 @@
 
   - name: copy the roboshop conf file
     template:
-      src: roboshop.conf
+      src: roboshop.conf.j2
       dest: /etc/nginx/default.d/roboshop.conf
       remote_src: yes
 
