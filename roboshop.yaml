@@ -67,12 +67,13 @@
       zone: "{{domain_name}}"
       record: "{{domain_name}}"
       type: A
-    when: action == "delete" and instances == "frontend"
+    when: action == "delete"
 
   - name: deleting instances
     amazon.aws.ec2_instance:
       state: absent
       name: "roboshop-{{ item }}"
       region: us-east-1
+      wait: false
     loop: "{{instances}}"
     when: action == "delete"
