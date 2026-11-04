@@ -16,7 +16,7 @@
   - name: Start & enable the Nginx service
     service:
       name: nginx
-      state: present
+      state: started
       enabled: yes
       
   - name: find all the files and folder in nginx directory #remove the default content inside directory
